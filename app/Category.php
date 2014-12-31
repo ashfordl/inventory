@@ -6,11 +6,11 @@ class Category extends Model
 {
     public function inventory()
     {
-        return $this->belongsTo('Inventory');
+        return $this->belongsTo('Inventory\Inventory');
     }
 
     public function items()
     {
-        return $this->hasMany('Item');
+        return $this->hasMany('Inventory\Item');
     }
 }

@@ -6,16 +6,16 @@ class Inventory extends Model
 {
     public function user()
     {
-        return $this->belongsTo('User');
+        return $this->belongsTo('Inventory\User');
     }
 
     public function categories()
     {
-        return $this->hasMany('Category');
+        return $this->hasMany('Inventory\Category');
     }
 
     public function locations()
     {
-        return $this->hasMany('Location');
+        return $this->hasMany('Inventory\Location');
     }
 }

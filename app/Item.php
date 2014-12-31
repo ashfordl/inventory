@@ -6,11 +6,11 @@ class Item extends Model
 {
     public function category()
     {
-        return $this->belongsTo('Category');
+        return $this->belongsTo('Inventory\Category');
     }
 
     public function location()
     {
-        return $this->belongsTo('Location');
+        return $this->belongsTo('Inventory\Location');
     }
 }

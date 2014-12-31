@@ -33,6 +33,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function inventories()
     {
-        return $this->hasMany('Inventory');
+        return $this->hasMany('Inventory\Inventory');
     }
 }
