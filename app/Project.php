@@ -2,15 +2,15 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Project extends Model
 {
     public function user()
     {
         return $this->belongsTo('Inventory\User');
     }
 
-    public function items()
+    public function references()
     {
-        return $this->hasMany('Inventory\Item');
+        return $this->hasMany('Inventory\Reference');
     }
 }

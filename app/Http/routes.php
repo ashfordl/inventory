@@ -13,8 +13,6 @@
 
 $router->get('/', 'InventoryController@getIndex');
 
-Route::get('/{id}', 'InventoryController@getInventory', array());
-
 Route::get('seed', function()
 {
     $user = new \Inventory\User();
@@ -23,29 +21,35 @@ Route::get('seed', function()
     $user->email = 'quater@mast.er';
     $user->save();
 
-    $inventory = new \Inventory\Inventory();
-    $inventory->name = 'Electronic Components';
-    $inventory->user()->associate($user);
-    $inventory->save();
-
     $category = new \Inventory\Category();
     $category->name = 'MOSFETs';
-    $category->inventory()->associate($inventory);
+    $category->user()->associate($user);
     $category->save();
-
-    $location = new \Inventory\Location();
-    $location->name = 'Repurposed Ice Cream Tub';
-    $location->inventory()->associate($inventory);
-    $location->save();
 
     $item = new \Inventory\Item();
     $item->name = 'IRZ44N';
-    $item->quantity = 10;
+    $item->user()->associate($user);
     $item->category()->associate($category);
-    $item->location()->associate($location);
     $item->save();
 
-    echo "Data seeded successfully. 5 inserts, 0 updates, 0 deletions.";
+    $project = new \Inventory\Project();
+    $project->name = 'Motor Driver Board';
+    $project->user()->associate($user);
+    $project->save();
+
+    $reference1 = new \Inventory\Reference();
+    $reference1->quantity = 6;
+    $reference1->item()->associate($item);
+    $reference1->project_id = null;
+    $reference1->save();
+
+    $reference2 = new \Inventory\Reference();
+    $reference2->quantity = 4;
+    $reference2->item()->associate($item);
+    $reference2->project()->associate($project);
+    $reference2->save();
+
+    echo "Data seeded successfully. 6 inserts, 0 updates, 0 deletions.";
 });
 
 Route::controllers([

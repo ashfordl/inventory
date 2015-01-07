@@ -4,13 +4,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
+    public function user()
+    {
+        return $this->belongsTo('Inventory\User');
+    }
+
     public function category()
     {
         return $this->belongsTo('Inventory\Category');
     }
 
-    public function location()
+    public function references()
     {
-        return $this->belongsTo('Inventory\Location');
+        return $this->hasMany('Inventory\Reference');
     }
 }
