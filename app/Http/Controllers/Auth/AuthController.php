@@ -16,6 +16,11 @@ class AuthController extends Controller {
 	|
 	*/
 
+    /*
+     * The URL to redirect to upon a successful login or registration
+     */
+    protected $redirectTo = '/';
+
 	use AuthenticatesAndRegistersUsers;
 
 }

@@ -56,3 +56,8 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+Route::any('check', function()
+{
+    echo Auth::check() ? "True" : "False";
+});
