@@ -11,7 +11,16 @@
 |
 */
 
-$router->get('/', 'InventoryController@getIndex');
+Route::model('user', 'Inventory\User');
+Route::model('project', 'Inventory\Project');
+
+Route::get('/', 'InventoryController@getIndex');
+
+Route::get('inventory', 'InventoryController@getInventory');
+
+Route::get('project/{project}', 'InventoryController@getProject');
+
+Route::get('spares', 'InventoryController@getSpares');
 
 Route::get('seed', function()
 {
