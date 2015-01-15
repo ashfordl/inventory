@@ -1,7 +1,9 @@
 <?php namespace Inventory\Http\Controllers;
 
+use Auth;
 use Inventory\Http\Requests;
 use Inventory\Http\Controllers\Controller;
+use Inventory\Item;
 use Inventory\Project;
 
 class InventoryController extends Controller {
@@ -12,13 +14,13 @@ class InventoryController extends Controller {
     }
 
 	/**
-	 * Show a list of
+	 * Display welcome message for guests or dashboard for users
 	 *
 	 * @return Response
 	 */
 	public function getIndex()
 	{
-        if (\Auth::guest())
+        if (Auth::guest())
         {
             // If not logged in, display welcome message
             return view('welcome');
@@ -26,15 +28,16 @@ class InventoryController extends Controller {
         else
         {
             // If logged in, display user dashboard
+            $user = Auth::user();
+
+            $items = Item::selectAllForUser($user->id)
+                        ->get();
+
             return view('inventory.inventories')
-                ->with('user', \Auth::user());
+                ->with('user', $user)
+                ->with('items', $items);
         }
 	}
-
-    public function getInventory()
-    {
-        echo "all components";
-    }
 
     public function getProject(Project $project)
     {
