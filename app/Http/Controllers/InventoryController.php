@@ -47,6 +47,13 @@ class InventoryController extends Controller {
 
     public function getSpares()
     {
-        echo "spare components";
+        $user = Auth::user();
+
+        $items = Item::selectSparesForUser($user->id)
+                    ->get();
+
+        return view('inventory.spares')
+            ->with('user', $user)
+            ->with('items', $items);
     }
 }
