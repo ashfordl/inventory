@@ -49,7 +49,12 @@ class Item extends Model
                     ->addSelect(DB::raw('(SELECT name FROM `categories` WHERE categories.id = items.category_id) AS category'))
 
                     // Only for the current user
-                    ->where('user_id', $userid);
+                    ->where('user_id', $userid)
+                    // Only if there is a quantity that is not null (ie no spares)
+                    ->whereNotNull(DB::raw('(SELECT SUM(quantity) FROM `references` WHERE references.item_id = items.id GROUP BY item_id)'))
+                    // Only if the quantity is not zero (quantity field has value of 0)
+                    ->where(DB::raw('(SELECT SUM(quantity) FROM `references` WHERE references.item_id = items.id GROUP BY item_id)'), '<>', '0');
+
     }
 
     /**
