@@ -41,8 +41,14 @@ class InventoryController extends Controller {
 
     public function getProject(Project $project)
     {
-        echo "components of ";
-        echo $project->name;
+        $user = Auth::user();
+
+        $references = Item::selectAllForProject($project->id)
+                    ->get();
+
+        return view('inventory.project')
+            ->with('user', $user)
+            ->with('references', $references);
     }
 
     public function getSpares()
