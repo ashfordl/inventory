@@ -10,7 +10,7 @@
     @endforeach
 </ul>
 
-
+@if (isset($items) && !empty($items))
 <h3>Your Inventory</h3>
 <table>
     <tr>
@@ -26,3 +26,20 @@
         </tr>
     @endforeach
 </table>
+@endif
+
+@if (isset($nostock) && !empty($nostock))
+<h3>Out of Stock</h3>
+<table>
+    <tr>
+        <th>Item</th>
+        <th>Category</th>
+    </tr>
+    @foreach($nostock as $item)
+        <tr>
+            <td>{{{ $item->name }}}</td>
+            <td>{{{ $item->category }}}</td>
+        </tr>
+    @endforeach
+</table>
+@endif

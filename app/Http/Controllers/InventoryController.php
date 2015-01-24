@@ -13,13 +13,13 @@ class InventoryController extends Controller {
         $this->middleware('auth', ['except' => 'getIndex']);
     }
 
-	/**
-	 * Display welcome message for guests or dashboard for users
-	 *
-	 * @return Response
-	 */
-	public function getIndex()
-	{
+    /**
+     * Display welcome message for guests or dashboard for users
+     *
+     * @return Response
+     */
+    public function getIndex()
+    {
         if (Auth::guest())
         {
             // If not logged in, display welcome message
@@ -33,11 +33,15 @@ class InventoryController extends Controller {
             $items = Item::selectAllForUser($user->id)
                         ->get();
 
+            $outofstock = Item::selectOutOfStockForUser($user->id)
+                        ->get();
+
             return view('inventory.inventories')
                 ->with('user', $user)
-                ->with('items', $items);
+                ->with('items', $items)
+                ->with('nostock', $outofstock);
         }
-	}
+    }
 
     public function getProject(Project $project)
     {

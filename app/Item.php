@@ -94,4 +94,31 @@ class Item extends Model
                         ->where('project_id', $projectId)
                         ->where('quantity', '<>', '0');
     }
+
+    /**
+     * Selects all items out of stock for a given user
+     *
+     * @param  int  $userId     The user id to select items from
+     * @return Query            A query expression to select this information
+     */
+    public static function selectOutOfStockForUser($userId)
+    {
+        return DB::table('items')
+                    // Select all from items table
+                    ->select('*')
+                    // Select category name for item
+                    ->addSelect(DB::raw('(SELECT name FROM `categories` WHERE categories.id = items.category_id) AS category'))
+
+                    // Only for the current user
+                    ->where('user_id', $userId)
+                    // Only if the quantity is null (no references) or 0
+                    ->where(function($query)
+                    {
+                        // Quantity is null (no references)
+                        $query->whereNull(DB::raw('(SELECT SUM(quantity) FROM `references` WHERE references.item_id = items.id GROUP BY item_id)'))
+                        // Or quantity is 0
+                        ->orWhere(DB::raw('(SELECT SUM(quantity) FROM `references` WHERE references.item_id = items.id GROUP BY item_id)'), '=', '0');
+                    });
+
+    }
 }
