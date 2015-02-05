@@ -13,6 +13,7 @@
 
 Route::model('user', 'Inventory\User');
 Route::model('project', 'Inventory\Project');
+Route::model('item', 'Inventory\Item');
 
 Route::get('/', 'InventoryController@getIndex');
 
@@ -21,6 +22,11 @@ Route::get('inventory', 'InventoryController@getInventory');
 Route::get('project/{project}', 'InventoryController@getProject');
 
 Route::get('spares', 'InventoryController@getSpares');
+
+Route::get('item/new', 'InventoryController@getItem');
+Route::get('item/{item?}', 'InventoryController@getItem');
+
+Route::post('item/{item?}', 'InventoryController@postItem');
 
 Route::get('seed', function()
 {

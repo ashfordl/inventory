@@ -34,6 +34,20 @@ class Item extends Model
     /*---------------------*/
 
     /**
+     * Returns true if the item has references not assigned to a project.
+     *
+     * @param  integer  $itemId     The item to search for
+     * @return boolean              True if the item has spares
+     */
+    public static function itemHasSpares($itemId)
+    {
+        return null !== Reference::where('item_id', $itemId)
+                                    ->where('quantity', '>', 0)
+                                    ->whereNull('project_id')
+                                    ->first();
+    }
+
+    /**
      * Selects all items for the given user, with quantity and category name
      *
      * @param  int  $userId     The user id to select items from

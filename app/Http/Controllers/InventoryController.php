@@ -3,8 +3,10 @@
 use Auth;
 use Inventory\Http\Requests;
 use Inventory\Http\Controllers\Controller;
+use Inventory\Category;
 use Inventory\Item;
 use Inventory\Project;
+use Inventory\Reference;
 
 class InventoryController extends Controller {
 
@@ -65,5 +67,39 @@ class InventoryController extends Controller {
         return view('inventory.spares')
             ->with('user', $user)
             ->with('items', $items);
+    }
+
+    public function getItem(Item $item = null)
+    {
+        $user = Auth::user();
+
+        // All categories, for drop-down category select
+        $categories = Category::all();
+
+        if (isset($item))
+        {
+            // All references (with positive quantity) involving this item
+            $references = Reference::allForItem($item->id);
+
+            // All projects without references to this item
+            $projects = Project::projectsWithoutItem($item->id);
+
+            // True if there are no spares for the item
+            $hasSpares = !Item::itemHasSpares($item->id);
+        }
+
+        return view('inventory.item')
+            ->with(['user' => $user,
+                'item' => $item,
+                'categories' => $categories,
+                'references' => $references,
+                'projects' => $projects,
+                'hasSpares' => $hasSpares
+            ]);
+    }
+
+    public function postItem(Item $item = null)
+    {
+        dd(\Input::all());
     }
 }

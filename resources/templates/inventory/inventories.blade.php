@@ -20,7 +20,7 @@
     </tr>
     @foreach($items as $item)
         <tr>
-            <td>{{{ $item->name }}}</td>
+            <td><a href="{{ action('InventoryController@getItem', $item->id) }}">{{{ $item->name }}}</a></td>
             <td>{{{ $item->category }}}</td>
             <td>{{{ $item->quantity }}}</td>
         </tr>
@@ -37,7 +37,7 @@
     </tr>
     @foreach($nostock as $item)
         <tr>
-            <td>{{{ $item->name }}}</td>
+            <td><a href="{{ action('InventoryController@getItem', $item->id) }}">{{{ $item->name }}}</a></td>
             <td>{{{ $item->category }}}</td>
         </tr>
     @endforeach
