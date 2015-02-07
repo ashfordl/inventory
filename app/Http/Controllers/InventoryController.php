@@ -53,8 +53,9 @@ class InventoryController extends Controller {
                     ->get();
 
         return view('inventory.project')
-            ->with('user', $user)
-            ->with('references', $references);
+            ->with(['user' => $user,
+                'project' => $project,
+                'references' => $references]);
     }
 
     public function getSpares()

@@ -1,20 +1,19 @@
-<h1>Welcome {{{ $user->name }}}</h1>
+@extends('layouts.master')
 
-<a href="{{ action('InventoryController@getIndex') }}">Home</a>
-<a href="{{ action('Auth\AuthController@getLogout') }}">Logout</a>
-
-<h3>Spares</h3>
-<table>
-    <tr>
-        <th>Item</th>
-        <th>Category</th>
-        <th>Quantity</th>
-    </tr>
-    @foreach($items as $item)
+@section('content')
+    <h1>Spare Components</h1>
+    <table>
         <tr>
-            <td>{{{ $item->name }}}</td>
-            <td>{{{ $item->category }}}</td>
-            <td>{{{ $item->quantity }}}</td>
+            <th>Item</th>
+            <th>Category</th>
+            <th>Quantity</th>
         </tr>
-    @endforeach
-</table>
+        @foreach($items as $item)
+            <tr>
+                <td>{{{ $item->name }}}</td>
+                <td>{{{ $item->category }}}</td>
+                <td>{{{ $item->quantity }}}</td>
+            </tr>
+        @endforeach
+    </table>
+@stop

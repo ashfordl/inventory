@@ -1,17 +1,21 @@
-<h1>Login</h1>
+@extends('layouts.master')
 
-<form method="post" action="{{ url('auth/login') }}">
+@section('content')
+    <h1>Login</h1>
 
-{{ $errors->first() === null ? "no errors" : $errors->first() }}
+    <form method="post" action="{{ url('auth/login') }}">
+        {{ $errors->first() === null ? "no errors" : $errors->first() }}
 
-<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-Email
-<input type="email" name="email" />
+        Email
+        <input type="email" name="email" />
 
-Password
-<input type="password" name="password" />
+        Password
+        <input type="password" name="password" />
 
-<input type="submit" value="Submit" />
+        <input type="checkbox" name="remember" /> Stay logged in?
 
-</form>
+        <input type="submit" value="Submit" />
+    </form>
+@stop

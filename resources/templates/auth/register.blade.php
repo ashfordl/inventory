@@ -1,23 +1,25 @@
-<h1>Register</h1>
+@extends('layouts.master')
 
-<form method="post" action="{{ url('auth/register') }}">
+@section('content')
+    <h1>Register</h1>
 
-{{ $errors->first() === null ? "no errors" : $errors->first() }}
+    <form method="post" action="{{ url('auth/register') }}">
+        {{ $errors->first() === null ? "no errors" : $errors->first() }}
 
-<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-Name
-<input type="text" name="name" />
+        Name
+        <input type="text" name="name" />
 
-Email
-<input type="email" name="email" />
+        Email
+        <input type="email" name="email" />
 
-Password
-<input type="password" name="password" />
+        Password
+        <input type="password" name="password" />
 
-Confirm Password
-<input type="password" name="password_confirmation" />
+        Confirm Password
+        <input type="password" name="password_confirmation" />
 
-<input type="submit" value="Submit" />
-
-</form>
+        <input type="submit" value="Submit" />
+    </form>
+@stop
