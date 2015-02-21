@@ -5,6 +5,7 @@
                 Inventory
             @show
         </title>
+        <base href="{{ URL::to('/') }}/public" />
     </head>
     <body>
     @include('layouts.header')
