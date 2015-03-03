@@ -1,7 +1,7 @@
 <?php namespace Inventory\Http\Controllers;
 
 use Auth;
-use Inventory\Http\Requests;
+use Illuminate\Http\Request;
 use Inventory\Http\Controllers\Controller;
 use Inventory\Category;
 use Inventory\Item;
@@ -99,8 +99,48 @@ class InventoryController extends Controller {
             ]);
     }
 
-    public function postItem(Item $item = null)
+    public function postItem(Request $request)
     {
-        dd(\Input::all());
+        $this->validate($request, [
+            'id' => 'required | valueOrExists:-1,items,id',
+            'name' => 'required | max:255',
+            'category_id' => 'required | exists:categories,id',
+            'references.project_id' => 'required_with:references.quantity | exists:projects,id',
+            'references.quantity' => 'required_with:references.id | exists:projects,id'
+        ]);
+
+        // TODO existsForUser: new validator to restrict exists with a where clause
+        $data = \Input::all();
+
+        $item;
+        if ($data['id'] == -1)
+        {
+            $item = new Item;
+        }
+        else
+        {
+            $item = Item::first(['id' => $data['id']]);
+        }
+
+        $item->name = $data['name'];
+        $item->user_id = Auth::user()->id;
+        $item->category_id = $data['category_id'];
+        $item->save();
+
+
+        if (isset($data['references']))
+        {
+            foreach($data['references'] as $reference)
+            {
+                $proj_id = $reference['project_id'] == -1 ? null : $reference['project_id'];
+
+                $ref_model = Reference::firstOrNew(['item_id' => $item->id,
+                                            'project_id' => $proj_id]);
+                $ref_model->quantity = $reference['quantity'];
+                $ref_model->save();
+            }
+        }
+
+        echo "Done! Success!";
     }
 }

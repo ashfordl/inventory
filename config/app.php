@@ -144,6 +144,11 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 
+        /*
+         * Custom Service Providers...
+         */
+        'Inventory\Providers\ValidatorServiceProvider',
+
 	],
 
 	/*
