@@ -15,15 +15,15 @@ Route::model('user', 'Inventory\User');
 Route::model('project', 'Inventory\Project');
 Route::model('item', 'Inventory\Item');
 
-Route::get('/', 'InventoryController@getIndex');
+Route::get('/', ['as' => 'home', 'uses' => 'InventoryController@getIndex']);
 
-Route::get('project/{project}', 'InventoryController@getProject');
-Route::get('spares', 'InventoryController@getSpares');
+Route::get('project/{project}', ['as' => 'project', 'uses' => 'InventoryController@getProject']);
+Route::get('spares', ['as' => 'spares', 'uses' => 'InventoryController@getSpares']);
 
-Route::get('item/new', 'InventoryController@getItem');
-Route::get('item/{item}', 'InventoryController@getItem');
+Route::get('item/new', ['as' => 'item_new', 'uses' => 'InventoryController@getItem']);
+Route::get('item/{item}', ['as' => 'item_get', 'uses' => 'InventoryController@getItem']);
 
-Route::post('item', 'InventoryController@postItem');
+Route::post('item', ['as' => 'item_post', 'uses' => 'InventoryController@postItem']);
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
