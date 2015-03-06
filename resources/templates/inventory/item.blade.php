@@ -56,7 +56,6 @@
 @stop
 
 @section('javascript')
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
      <script>
         var csrf = '{{ csrf_token() }}';
         var itemId = {{ $item->id or -1 }};
