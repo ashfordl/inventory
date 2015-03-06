@@ -119,7 +119,7 @@ class InventoryController extends Controller {
         }
         else
         {
-            $item = Item::first(['id' => $data['id']]);
+            $item = Item::find(['id' => $data['id']])->first();
         }
 
         $item->name = $data['name'];
