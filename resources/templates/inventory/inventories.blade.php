@@ -11,8 +11,9 @@
         @endforeach
     </ul>
 
-    @if (isset($items) && !empty($items))
     <h3>Your Inventory</h3>
+    <a href="{{ route('item_new') }}">Add new item</a>
+    @if (isset($items) && !empty($items))
     <table>
         <tr>
             <th>Item</th>
@@ -27,10 +28,12 @@
             </tr>
         @endforeach
     </table>
+    @else
+    <p>No items in inventory</p>
     @endif
 
-    @if (isset($nostock) && !empty($nostock))
     <h3>Out of Stock</h3>
+    @if (isset($nostock) && !empty($nostock))
     <table>
         <tr>
             <th>Item</th>
@@ -43,5 +46,7 @@
             </tr>
         @endforeach
     </table>
+    @else
+    <p>No items out of stock</p>
     @endif
 @stop
