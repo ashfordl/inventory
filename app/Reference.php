@@ -4,6 +4,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reference extends Model
 {
+    protected $fillable = ['item_id', 'project_id', 'quantity'];
+
     public function item()
     {
         return $this->belongsTo('Inventory\Item');
