@@ -39,7 +39,8 @@
         @endif
 
         @if (!empty($projects) || $hasSpares)
-            <select>
+        <div id="reference-new-div">
+            <select id="reference-new-select">
                 @foreach ($projects as $project)
                     <option value="{{ $project->id }}">{{{ $project->name }}}</option>
                 @endforeach
@@ -48,7 +49,10 @@
                     <option value="-1">Spares</option>
                 @endif
             </select>
-            <input type="number" min="0" value="0" />
+            <input id="reference-new-quantity" type="number" min="0" value="0" />
+
+            <button id="reference-new-add" type="button">Add reference</button>
+        </div>
         @endif
 
         <input type="submit" value="Submit" />

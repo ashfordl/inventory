@@ -38,4 +38,37 @@ $(document).ready(function() {
                 console.log(xhr);
             });
     });
+
+    // Add new reference row upon button press
+    $('#reference-new-add').click(function(e) {
+        // Get selected option
+        var selected = $('#reference-new-select option:selected');
+
+        // Get data of selected option
+        var id = selected.val();
+        var name = selected.text();
+        var quantity = $('#reference-new-quantity').val();
+
+        // Create new row element for table of references
+        var element =
+        '<tr class="item-reference">'
+            +'<td class="hidden reference-id"> {0} </td>'
+            +'<td> {1} </td>'
+            +'<td><input type="number" min="0" class="reference-quantity" value="{2}" /></td>'
+        +'</tr>';
+
+        // Format values into element
+        element = element.format(id, name, quantity);
+
+        // Append element
+        $('#item-references').append(element);
+
+        // Remove selected option
+        selected.remove();
+
+        // If no other options, hide div
+        if ($('#reference-new-select option').length == 0) {
+            $('#reference-new-div').remove();
+        }
+    });
 });
