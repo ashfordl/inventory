@@ -141,6 +141,7 @@ class InventoryController extends Controller {
             }
         }
 
-        echo "Done! Success!";
+        // Echo URL to item page, so that user can be redirected away from /item/new
+        echo route("item_get", $item->id);
     }
 }

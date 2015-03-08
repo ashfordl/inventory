@@ -26,6 +26,13 @@ $(document).ready(function() {
         $.post('item', data)
             .done(function(data) {
                 alert("Success!");
+
+                // If on new item page
+                if (window.location.href.indexOf("/item/new") > -1) {
+                    // Redirect to /item/id
+                    // PHP backend will echo the correct URL
+                    window.location.href = data;
+                }
             })
             .fail(function(xhr, message, c) {
                 if (xhr.status == 422) {
