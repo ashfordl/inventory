@@ -61,7 +61,6 @@
 
 @section('javascript')
      <script>
-        var csrf = '{{ csrf_token() }}';
         var itemId = {{ $item->id or -1 }};
      </script>
      <script src="javascript/item.js"></script>
