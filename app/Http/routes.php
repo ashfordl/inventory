@@ -27,5 +27,5 @@ Route::post('item', ['as' => 'item_post', 'uses' => 'InventoryController@postIte
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+	// 'password' => 'Auth\PasswordController',
 ]);
