@@ -10,7 +10,7 @@
         </tr>
         @foreach($references as $reference)
             <tr>
-                <td>{{{ $reference->item->name }}}</td>
+                <td><a href="{{ action('InventoryController@getItem', $reference->item->id) }}">{{{ $reference->item->name }}}</a></td>
                 <td>{{{ $reference->item->category->name }}}</td>
                 <td>{{{ $reference->quantity }}}</td>
             </tr>
