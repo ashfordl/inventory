@@ -52,6 +52,7 @@ class ItemController extends Controller {
         ]);
 
         // TODO existsForUser: new validator to restrict exists with a where clause
+
         $data = \Input::all();
 
         $item;

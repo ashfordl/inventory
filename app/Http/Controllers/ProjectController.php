@@ -37,15 +37,9 @@ class ProjectController extends Controller {
 
         $data = \Input::all();
 
-        $project;
-        if ($data['id'] == -1)
-        {
-            $project = new Project;
-        }
-        else
-        {
-            $project = Project::find(['id' => $data['id']])->first();
-        }
+        $project = $data['id'] == -1
+                        ? new Project
+                        : Project::find(['id' => $data['id']])->first();
 
         $project->name = $data['name'];
         $project->user()->associate(Auth::user());

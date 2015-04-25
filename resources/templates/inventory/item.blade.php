@@ -10,6 +10,8 @@
     <form id="form-item" method="post" action="{{ route('item_post', isset($item) ? $item->id : -1) }}">
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 
+        {{ $errors->first() === null ? "" : $errors->first() }}
+
         Name
         <input type="text" name="item" id="item-name" value="{{{ $item->name or "" }}}" />
 
