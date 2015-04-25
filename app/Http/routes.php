@@ -19,6 +19,7 @@ Route::get('/', ['as' => 'home', 'uses' => 'InventoryController@getIndex']);
 Route::get('spares', ['as' => 'spares', 'uses' => 'InventoryController@getSpares']);
 
 Route::get('project/{project}', ['as' => 'project_get', 'uses' => 'ProjectController@getProject']);
+Route::post('project', ['as' => 'project_post', 'uses' => 'ProjectController@postProject']);
 
 Route::get('item/new', ['as' => 'item_new', 'uses' => 'ItemController@getItem']);
 Route::get('item/{item}', ['as' => 'item_get', 'uses' => 'ItemController@getItem']);

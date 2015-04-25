@@ -3,7 +3,7 @@
 @section('content')
     <h1>Home</h1>
 
-    <h3>Projects</h3>
+    <h2>Projects</h2>
         @if ($user->hasSpares())
             <ul>
             <li><a href="{{ route('spares') }}">Spare components</a></li>
@@ -16,9 +16,11 @@
         @foreach($user->projects as $project)
             <li><a href="{{ route('project_get', $project->id) }}">{{{ $project->name }}}</a></li>
         @endforeach
-    </ul>
+        </ul>
 
-    <h3>Your Inventory</h3>
+    @include('inventory.homepage.project-form')
+
+    <h2>Your Inventory</h2>
     <a href="{{ route('item_new') }}">Add new item</a>
     @if (isset($items) && !empty($items))
     <table>

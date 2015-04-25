@@ -27,4 +27,30 @@ class ProjectController extends Controller {
                 'project' => $project,
                 'references' => $references]);
     }
+
+    public function postProject(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required | valueOrExists:-1,projects,id',
+            'name' => 'required | max:255'
+        ]);
+
+        $data = \Input::all();
+
+        $project;
+        if ($data['id'] == -1)
+        {
+            $project = new Project;
+        }
+        else
+        {
+            $project = Project::find(['id' => $data['id']])->first();
+        }
+
+        $project->name = $data['name'];
+        $project->user()->associate(Auth::user());
+        $project->save();
+
+        return redirect()->route('project_get', $project);
+    }
 }
