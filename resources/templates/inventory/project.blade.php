@@ -1,7 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1>{{{ $project->name }}}</h1>
+    {{ $errors->first() === null ? "" : $errors->first() }}
+    <h1 id="project-name-header">{{{ $project->name }}}</h1>
+
+    <button id="project-edit">Edit</button>
+
     <table>
         <tr>
             <th>Item</th>
@@ -16,4 +20,12 @@
             </tr>
         @endforeach
     </table>
+@stop
+
+@section('javascript')
+     <script>
+        var projectId = {{ $project->id }};
+        var postRoute = "{{ route('project_post', $project->id) }}";
+     </script>
+     <script src="javascript/project.js"></script>
 @stop
