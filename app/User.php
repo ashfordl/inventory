@@ -45,4 +45,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasMany('Inventory\Project');
     }
+
+    public function references()
+    {
+        return $this->hasManyThrough('Inventory\Reference', 'Inventory\Item');
+    }
 }
