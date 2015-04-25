@@ -7,7 +7,7 @@
 @section('content')
     <h1>{{ $item->name or "New Item" }}</h1>
 
-    <form id="form-item" method="post" action="{{ action('InventoryController@postItem', isset($item) ? $item->id : -1) }}">
+    <form id="form-item" method="post" action="{{ route('item_post', isset($item) ? $item->id : -1) }}">
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 
         Name
@@ -30,7 +30,6 @@
 
                 @foreach ($references as $reference)
                     <tr class="item-reference">
-                        <td class="hidden reference-id">{{ $reference->project->id or -1 }}</td>
                         <td>{{ $reference->project->name or "Spares" }}</td>
                         <td><input type="number" min="0" class="reference-quantity" value="{{ $reference->quantity or 0 }}" /></td>
                     </tr>

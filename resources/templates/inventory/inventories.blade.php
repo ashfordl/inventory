@@ -6,7 +6,7 @@
     <h3>Projects</h3>
         @if ($user->hasSpares())
             <ul>
-            <li><a href="{{ action('InventoryController@getSpares') }}">Spare components</a></li>
+            <li><a href="{{ route('spares') }}">Spare components</a></li>
         @elseif (empty($user->projects))
             <p>No projects</p>
         @else
@@ -14,7 +14,7 @@
         @endif
 
         @foreach($user->projects as $project)
-            <li><a href="{{ action('InventoryController@getProject', $project->id) }}">{{{ $project->name }}}</a></li>
+            <li><a href="{{ route('project_get', $project->id) }}">{{{ $project->name }}}</a></li>
         @endforeach
     </ul>
 
@@ -29,7 +29,7 @@
         </tr>
         @foreach($items as $item)
             <tr>
-                <td><a href="{{ action('InventoryController@getItem', $item->id) }}">{{{ $item->name }}}</a></td>
+                <td><a href="{{ route('item_get', $item->id) }}">{{{ $item->name }}}</a></td>
                 <td>{{{ $item->category }}}</td>
                 <td>{{{ $item->quantity }}}</td>
             </tr>
@@ -48,7 +48,7 @@
         </tr>
         @foreach($nostock as $item)
             <tr>
-                <td><a href="{{ action('InventoryController@getItem', $item->id) }}">{{{ $item->name }}}</a></td>
+                <td><a href="{{ route('item_get', $item->id) }}">{{{ $item->name }}}</a></td>
                 <td>{{{ $item->category }}}</td>
             </tr>
         @endforeach

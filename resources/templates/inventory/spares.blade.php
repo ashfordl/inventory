@@ -10,7 +10,7 @@
         </tr>
         @foreach($items as $item)
             <tr>
-                <td><a href="{{ action('InventoryController@getItem', $item->id) }}">{{{ $item->name }}}</a></td>
+                <td><a href="{{ route('item_get', $item->id) }}">{{{ $item->name }}}</a></td>
                 <td>{{{ $item->category }}}</td>
                 <td>{{{ $item->quantity }}}</td>
             </tr>
