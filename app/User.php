@@ -50,4 +50,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasManyThrough('Inventory\Reference', 'Inventory\Item');
     }
+
+    /**
+     * Returns true if the user has any references not assigned to a project.
+     *
+     * @return boolean True if the user has spare references
+     */
+    public function hasSpares()
+    {
+        return (null !== $this->references()
+                        ->where('quantity', '>', 0)
+                        ->whereNull('project_id')
+                        ->first());
+    }
 }

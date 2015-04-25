@@ -4,8 +4,15 @@
     <h1>Home</h1>
 
     <h3>Projects</h3>
-    <ul>
-        <li><a href="{{ action('InventoryController@getSpares') }}">Spare components</a></li>
+        @if ($user->hasSpares())
+            <ul>
+            <li><a href="{{ action('InventoryController@getSpares') }}">Spare components</a></li>
+        @elseif (empty($user->projects))
+            <p>No projects</p>
+        @else
+            <ul>
+        @endif
+
         @foreach($user->projects as $project)
             <li><a href="{{ action('InventoryController@getProject', $project->id) }}">{{{ $project->name }}}</a></li>
         @endforeach
