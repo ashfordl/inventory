@@ -32,6 +32,7 @@
 
                 @foreach ($references as $reference)
                     <tr class="item-reference">
+                        <td class="hidden reference-id">{{ $reference->project->id or -1 }}</td>
                         <td>{{ $reference->project->name or "Spares" }}</td>
                         <td><input type="number" min="0" class="reference-quantity" value="{{ $reference->quantity or 0 }}" /></td>
                     </tr>
