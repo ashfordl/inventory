@@ -23,20 +23,30 @@
     <h2>Your Inventory</h2>
     <a href="{{ route('item_new') }}">Add new item</a>
     @if (isset($items) && !empty($items))
-    <table>
-        <tr>
-            <th>Item</th>
-            <th>Category</th>
-            <th>Quantity</th>
-        </tr>
-        @foreach($items as $item)
-            <tr>
-                <td><a href="{{ route('item_get', $item->id) }}">{{{ $item->name }}}</a></td>
-                <td>{{{ $item->category }}}</td>
-                <td>{{{ $item->quantity }}}</td>
-            </tr>
-        @endforeach
-    </table>
+    <div id="items-searchable">
+        <input class="search" placeholder="Search..." />
+        <h4>Sort by</h4>
+        <button class="sort" data-sort="name">Name</button>
+        <button class="sort" data-sort="category">Category</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody class="list">
+                @foreach($items as $item)
+                    <tr>
+                        <td class="name"><a href="{{ route('item_get', $item->id) }}">{{{ $item->name }}}</a></td>
+                        <td class="category">{{{ $item->category }}}</td>
+                        <td class="quantity">{{{ $item->quantity }}}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
     @else
     <p>No items in inventory</p>
     @endif
@@ -58,4 +68,13 @@
     @else
     <p>No items out of stock</p>
     @endif
+@stop
+
+@section('javascript')
+    <script src="javascript/lib/list.js"></script>
+    <script>
+        var searchOptions = { valueNames: ['name', 'category', 'quantity']};
+        var itemsList = new List('items-searchable', searchOptions);
+        itemsList.sort('name', { order: "asc" });
+    </script
 @stop
