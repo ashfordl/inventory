@@ -996,7 +996,9 @@ module.exports = function(list) {
         },
         values: function(values, column) {
             if (values.hasOwnProperty(column)) {
-                text = toString(values[column]).toLowerCase();
+                // text = toString(values[column]).toLowerCase();
+                // Remove HTML tags from search text
+                text = toString(values[column]).toLowerCase().replace(/<[^>]*>/g, "");
                 if ((searchString !== "") && (text.search(searchString) > -1)) {
                     return true;
                 }
@@ -1067,7 +1069,10 @@ var naturalSort = require('natural-sort'),
 module.exports = function(list) {
     list.sortFunction = list.sortFunction || function(itemA, itemB, options) {
         options.desc = options.order == "desc" ? true : false; // Natural sort uses this format
-        return naturalSort(itemA.values()[options.valueName], itemB.values()[options.valueName], options);
+        // return naturalSort(itemA.values()[options.valueName], itemB.values()[options.valueName], options);
+        // Remove HTML tags from search text
+        // Source "egardner"@GitHub https://github.com/javve/list.js/issues/303
+        return naturalSort(itemA.values()[options.valueName].replace(/<[^>]*>/g, ""), itemB.values()[options.valueName].replace(/<[^>]*>/g, ""), options);
     };
 
     var buttons = {

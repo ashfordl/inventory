@@ -73,7 +73,7 @@
 @section('javascript')
     <script src="javascript/lib/list.js"></script>
     <script>
-        var searchOptions = { valueNames: ['name', 'category', 'quantity']};
+        var searchOptions = { valueNames: ['name', 'category' ]};
         var itemsList = new List('items-searchable', searchOptions);
         itemsList.sort('name', { order: "asc" });
     </script
