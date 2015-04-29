@@ -12,5 +12,5 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.sass('app.scss');
+    mix.copy('bower_components/list.js/dist/list.min.js', 'public/javascript/lib/list.min.js');
 });

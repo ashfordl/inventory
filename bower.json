@@ -1,0 +1,24 @@
+{
+  "name": "Inventory",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ashfordl/inventory",
+  "authors": [
+    "ashfordl <luke.a.ashford@gmail.com>"
+  ],
+  "description": "A web app to keep an inventory of electronic components",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "list.js": "ashfordl/list.js#8c347953f1a1b6e2dbee204cbe4d246dc1bcb078"
+  },
+  "resolutions": {
+    "list.js": "8c347953f1a1b6e2dbee204cbe4d246dc1bcb078"
+  }
+}

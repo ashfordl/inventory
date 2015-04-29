@@ -71,7 +71,7 @@
 @stop
 
 @section('javascript')
-    <script src="javascript/lib/list.js"></script>
+    <script src="javascript/lib/list.min.js"></script>
     <script>
         var searchOptions = { valueNames: ['name', 'category' ]};
         var itemsList = new List('items-searchable', searchOptions);
